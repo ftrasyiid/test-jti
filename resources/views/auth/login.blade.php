@@ -45,11 +45,17 @@
                     {{ __('Login') }}
                 </x-jet-button>
             </div>
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-center mt-4">
                 <a href="{{ url('auth/google') }}">
-                    <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
+                    <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png">
                 </a>
             </div>
         </form>
+        <p class="text-center">
+            Or <br>
+            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                {{ __('Create an Account') }}
+            </a>
+        </p>
     </x-jet-authentication-card>
 </x-guest-layout>

@@ -29,7 +29,7 @@
                     </select>
                 </div>
                 <div class="my-2 text-end">
-                    <button type="submit" class="btn btn-lg btn-success">Save</button>
+                    <button id="jtiSave" type="submit" class="btn btn-lg btn-success">Save</button>
                     <button id="jtiAuto" type="button" class="btn btn-lg btn-primary">Auto</button>
                 </div>
             </form>
@@ -56,6 +56,11 @@
             })
 
             $('#jtiAuto').click(function() {
+                $(this).prop('disabled', true);
+                $('#jtiSave').prop('disabled', true);
+                $(this).after(`<div id="febriSpinner" class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+                </div>`)
                 $.ajax({
                     headers : {
                         "Authorization" : "Bearer " + "{{ session()->get('api_key') }}"
@@ -64,6 +69,10 @@
                     url : "{{ route('api.jti.auto') }}"
                 }).done(function(result) {
                     window.location = "{{ route('jti') }}";
+                }).always(function() {
+                    $('#febriSpinner').remove();
+                    $('#jtiSave').prop('disabled', false);
+                    $(this).prop('disabled', false);
                 })
             })
         })

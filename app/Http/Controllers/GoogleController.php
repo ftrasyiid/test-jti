@@ -60,7 +60,7 @@ class GoogleController extends Controller
             }
     
         } catch (Exception $e) {
-            abort(404);
+            return redirect()->route('login');
         }
     }
 }
